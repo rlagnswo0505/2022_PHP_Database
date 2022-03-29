@@ -17,24 +17,31 @@ DROP TABLE membert_bl;
 DROP TABLE productTBL;
 CREATE TABLE productTBL(
 	productName CHAR(4) PRIMARY KEY,
-	cost INT NOT NULL,
+	cost INT UNSIGNED NOT NULL,
 	MAKEDATE DATE,
 	company CHAR(5),
 	amount INT NOT null
 );
 
+/* 
+SIGNED 양수 음수 다 사용가능 UNSIGNED 양수만 사용가능
+	-5 ~ 5 (11개)
+	0 ~ 10 (11개)
+/*
 
 -- CRUD, DML(데이터 조작어)
 -- Create (insert문)
+
 /*
 INSERT INTO 테이블명
 (값을 넣고 싶은 컬럼명들)
 VALUES
 (값들)
 */
+
 INSERT INTO membertbl 
 (memberid,membername, memberaddress)
-VALUES(1, '홍길동','서울시');
+VALUES('1', '홍길동','서울시');
 
 INSERT INTO membertbl 
 (memberid,membername, memberaddress)
