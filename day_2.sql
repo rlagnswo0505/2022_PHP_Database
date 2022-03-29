@@ -131,4 +131,12 @@ WHERE salary in(SELECT salary FROM salaries WHERE emp_no = 10010);
 SELECT * FROM salaries
 WHERE salary >= all(SELECT salary FROM salaries WHERE emp_no = 10010);
 
+-- 오름차순 (위에서 아래로 값이 커진다.) ASC 기본값
+-- 내림차순 (위에서 아래로 값디 작아진다.) DESC
+SELECT * FROM salaries
+WHERE emp_no IN (499988, 499987, 499986)
+ORDER BY emp_no DESC, salary DESC;
 
+
+SELECT * FROM employees
+ORDER BY birth_date desc, gender desc;
