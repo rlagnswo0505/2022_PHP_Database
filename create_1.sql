@@ -98,12 +98,20 @@ WHERE memberaddress = '서울시';
 
 
 SELECT * FROM membertbl
-WHERE memberaddress != '서울시'
+WHERE memberaddress != '서울시';
+
+SELECT * FROM membertbl
 OR memberaddress is NULL;
-;
+
+SELECT * FROM membertbl
+OR memberaddress is NOT NULL;
 
 SELECT * FROM membertbl
 WHERE memberaddress is NULL;
+
+SELECT * FROM membertbl
+WHERE memberaddress != '서울시'
+OR memberAddress IS NULL;
 
 -- 주소가 '부산시'이면서 이름이 '사나이'인 레코드를 나타나게 하시오.
 SELECT * 
@@ -119,8 +127,3 @@ SELECT *
 */
 
 -- Delete (delete문)
-
-
-
-
-
