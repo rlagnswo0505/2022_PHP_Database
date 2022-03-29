@@ -73,10 +73,62 @@ UPDATE employees
 SET gender = 'f',
 hire_date = '2021-03-29',
 first_name = 'Jindong'
-WHERE emp_no - 500000;
+WHERE emp_no = '500000';
 
 SELECT * FROM employees
 WHERE emp_no = '500000';
 
 DELETE from employees
 WHERE left(hire_date, 4) >= '2020';
+
+SELECT * FROM employees
+WHERE left(hire_date, 4) >= '2020';
+
+-- dos로 mysql 사용할테 테이블 확인
+DESC employees;
+
+SELECT 1+1 as ddd;
+
+-- 보여줄때만 이름 잠시 바꾸기
+-- as 로 이름을 바꿀때 공백이 있으면 ''로 감싸줘야 한다.
+SELECT emp_no AS 'my_no' FROM employees AS `a`
+WHERE left(hire_date, 4) >= '2020';
+
+/* emp_no = 499613와 생년월일이 같은 사람을 찾자 */
+
+SELECT * FROM employees
+WHERE birth_date = '1953-06-09';
+
+SELECT birth_date FROM employees
+WHERE emp_no = 499613;
+
+-- subQuery 쿼리문 안에 쿼리문이 있다.
+SELECT * FROM employees
+WHERE birth_date = (SELECT birth_date FROM employees
+WHERE emp_no = 499613);
+
+/*
+emp-no  = 499619
+사람과 같은 성별을 갖고 있는 사람만 나타나도록 해주세요
+*/
+
+-- = 과 서브쿼리를 사용할 때는 값이 단 1개만(스칼라값) 와야한다.
+SELECT * FROM employees
+WHERE gender = (SELECT gender FROM employees
+WHERE emp_no = 499619) AND emp_no != 499619;
+
+-- some과 any는 동일하다. 최소조건
+-- 786,848 결과물
+SELECT * FROM salaries
+WHERE salary = any(SELECT salary FROM salaries WHERE emp_no = 10010);
+
+-- = any 와 같은 말이기 때문에 in 쓰면 된다.
+SELECT * FROM salaries
+WHERE salary in(SELECT salary FROM salaries WHERE emp_no = 10010);
+
+-- all은 모든 조건 만족
+-- 480,870 결과물
+SELECT * FROM salaries
+WHERE salary >= all(SELECT salary FROM salaries WHERE emp_no = 10010);
+
+
