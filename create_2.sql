@@ -108,15 +108,19 @@ SELECT *
    AND membername = '사나이';
    
 -- LIKE문은 문자열 포함된 레코드를 찾을 때.
+
+-- 팅이 들어가면 찾는다
 SELECT * FROM membertbl
 WHERE membername LIKE '%팅%';
 
+-- 사로 시작하면 찾는다
 SELECT * FROM membertbl
 WHERE membername LIKE '사%';
 
 SELECT * FROM membertbl
 WHERE membername LIKE '나%';
 
+-- 다로 끝나면 찾는다.
 SELECT * FROM membertbl
 WHERE membername LIKE '%다';
 
@@ -127,6 +131,7 @@ WHERE membername LIKE '%다';
 	WHERE 레코드 선택
 */
 
+-- 보통 where절에 PK가 들어간다
 UPDATE membertbl
 SET membername = '게일'
 WHERE memberid = '7';
@@ -145,7 +150,6 @@ WHERE memberId = 'a';
 
 
 /*
-
 	my name is hong
 
  camel case 			: myNameIsHong
