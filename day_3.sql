@@ -50,12 +50,16 @@ FROM salaries
 GROUP BY emp_no;
 
 /* 부서별 사원 수*/
+SELECT dept_no, COUNT(*)
+FROM dept_emp
+GROUP BY dept_no;
 
-SELECT title, COUNT(*)
-FROM titles
-GROUP BY title;
-
-
-
+-- GROUP BY 다음에 HAVING 절을 사용하면 GROUP BY에 조건문을 쓰는것
+/* 부서별 사원 수, 부서별 사원수가 20,000명 이상인 부서만 나오도록 한다.*/
+SELECT dept_no, COUNT(*)
+FROM dept_emp
+GROUP BY dept_no
+HAVING COUNT(*) >= 20000
+ORDER BY COUNT(*) DESC;
 
 
