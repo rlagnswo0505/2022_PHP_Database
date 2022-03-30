@@ -125,3 +125,60 @@ SELECT * FROM t_hobbit_2;
 INSERT INTO t_hobbit_2
 (hobbit_id, NAME)
 SELECT i_hobbit + 3, nm FROM t_hobbit;
+
+-- emp_no 10001의 모든 salary를 1,000 씩 올리고 싶다.
+UPDATE salaries
+SET salary = salary + 1000
+WHERE emp_no = 10001;
+
+SELECT * FROM salaries
+WHERE emp_no = 10001;
+
+-- insert ignore
+SELECT * FROM t_hobbit_2;
+INSERT ignore INTO t_hobbit_2 (hobbit_id, NAME) VALUES (7, '탁구');
+INSERT ignore INTO t_hobbit_2 (hobbit_id, NAME) VALUES (8, '스키');
+
+INSERT INTO t_hobbit_2 (hobbit_id, NAME) VALUES (7, '탁구')
+ON DUPLICATE KEY UPDATE NAME = '수영';
+
+DROP TABLE t_board;
+
+CREATE table t_board (
+	i_board INT UNSIGNED PRIMARY KEY,
+	title VARCHAR(20) UNIQUE NOT NULL,
+	hits INT UNSIGNED DEFAULT 0
+);
+
+SELECT * FROM t_board;
+
+INSERT INTO t_board (i_board, title, hits) VALUES (2,'안녕', 0)
+ON DUPLICATE KEY UPDATE hits = hits + 1;
+
+WITH dept_emp_d001 (emp_no, from_date, to_date)
+AS (
+SELECT emp_no, from_date, to_date FROM dept_emp
+WHERE dept_no = 'd001'
+)SELECT * FROM dept_emp_d001;
+
+SELECT A.* from (
+SELECT emp_no, from_date, to_date FROM dept_emp
+WHERE dept_no = 'd001'
+) A;
+
+/* 사람별 평균 급여에서의 평균값보다 큰 사람들만 나오게 해주세요*/
+
+DROP TABLE t_order;
+DROP TABLE t_customer;
+
+CREATE TABLE t_order (
+	o_no INT UNSIGNED PRIMARY KEY,
+	cus_no INT UNSIGNED,
+	o_date DATE DEFAULT NOW(),
+	o_price INT DEFAULT 0
+);
+CREATE TABLE t_customer (
+	cus_no INT PRIMARY KEY,
+	nm VARCHAR(10) NOT null
+);
+
