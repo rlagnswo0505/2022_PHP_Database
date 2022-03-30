@@ -51,15 +51,20 @@ last_name like '%ch%';
 */
 
 SELECT * FROM employees
-where left(birth_date, 4) >= '1960';
+where  >= '1960';
 
 SELECT * FROM employees
 WHERE birth_date LIKE '1952%';
 
 SELECT * FROM employees
-WHERE birth_date LIKE '____-09-__';
+WHERE birth_date LIKE '____-1_-__';
 
-SELECT birth_date, RIGHT(birth_date, 2), MID(birth_date, 6,2)
+/* CASR 형변환 */
+
+SELECT birth_date
+, CAST(left(birth_date, 4) AS INT)
+, MID(birth_date, 6,2)
+, RIGHT(birth_date, 2)
 FROM employees;
 
 /*
@@ -68,7 +73,8 @@ emp_no : 500000 사원의 성별을 여성으로 바꾸고, hire_date 2021-03-29
 first_name은 Jindong으로 변경
 */
 
-
+-- FROM 들어가는 것은 SELECT와 DELETE 밖에 없다
+-- UPDATE 에서는 WHERE 절에 거의 PK값이 들어간다
 UPDATE employees
 SET gender = 'f',
 hire_date = '2021-03-29',
@@ -137,6 +143,9 @@ SELECT * FROM salaries
 WHERE emp_no IN (499988, 499987, 499986)
 ORDER BY emp_no DESC, salary DESC;
 
-
+/*
+employees 테이블에서 나이는 내림차순으로
+성별은 여성이 위로, 남성이 아래로 나오게 select하시오.
+*/
 SELECT * FROM employees
 ORDER BY birth_date desc, gender desc;
