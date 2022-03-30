@@ -6,6 +6,13 @@ CREATE TABLE membertbl (
 	memberName CHAR(5) NOT NULL,
 	memberAddress CHAR(20) NULL
 );
+
+CREATE TABLE membertbl (
+	memberID char(8) NOT NULL,
+	memberName CHAR(5) NOT NULL,
+	memberAddress CHAR(20) NULL,
+	primary key (memberID)
+);
 /*
  unique, not null, index
 */
