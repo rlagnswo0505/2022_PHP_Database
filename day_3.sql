@@ -175,10 +175,33 @@ CREATE TABLE t_order (
 	o_no INT UNSIGNED PRIMARY KEY,
 	cus_no INT UNSIGNED,
 	o_date DATE DEFAULT NOW(),
-	o_price INT DEFAULT 0
+	o_price INT DEFAULT 0,
+	FOREIGN KEY (cus_no) REFERENCES t_customer(cus_no)
 );
+SELECT * FROM t_order;
+SELECT * FROM t_customer;
+
 CREATE TABLE t_customer (
-	cus_no INT PRIMARY KEY,
+	cus_no INT UNSIGNED PRIMARY KEY,
 	nm VARCHAR(10) NOT null
 );
 
+
+INSERT INTO t_customer (cus_no, nm) 
+VALUE (3, '홍길동'), (5, '이순신');
+
+INSERT INTO t_order (o_no, cus_no, o_price) 
+VALUE (1,3,55000), (2,5,70000), (3,3,60000); 
+
+UPDATE t_customer
+SET nm = '장보고'
+WHERE cus_no = 5;
+
+DELETE FROM t_order
+WHERE o_no = 2;
+
+SELECT * FROM t_customer;
+SELECT * FROM t_order;
+
+SELECT o_no, o_price FROM t_order
+WHERE cus_no = 3;
