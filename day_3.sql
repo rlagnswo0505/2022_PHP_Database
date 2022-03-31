@@ -27,7 +27,7 @@ SELECT * FROM salaries
 ORDER BY salary DESC
 LIMIT 4, 6;
 
--- 테이블 컬럼, 데이터타입, 레코드 복사
+-- 테이블 컬럼, 데이터타입, 레코드 복사 (제약조건 복사 X)
 CREATE TABLE departments_temp2 AS
 SELECT * FROM departments;
 
@@ -42,7 +42,8 @@ SELECT * FROM departments;
 -- 그룹 함수 min, max, sum, avg, count
 
 -- group by 를 사용 안 했을 때는 전체에서 값을 가져온다.
-SELECT MIN(salary),MAX(salary), SUM(salary), AVG(salary), COUNT(emp_no) FROM salaries;
+SELECT MIN(salary),MAX(salary), SUM(salary), AVG(salary), COUNT(emp_no)
+FROM salaries;
 
 
 SELECT emp_no, MIN(salary),MAX(salary), SUM(salary), AVG(salary),COUNT(*)
@@ -70,8 +71,10 @@ SELECT emp_no FROM salaries
 WHERE salary = (SELECT MIN(salary) FROM salaries)
 );
 
-SELECT emp_no FROM salaries
-ORDER BY salary LIMIT 1;
+SELECT * FROM employees
+WHERE emp_no =
+(SELECT emp_no FROM salaries
+ORDER BY salary LIMIT 1);
 
 -- auto_increment
 USE `test`;
@@ -98,6 +101,8 @@ hobbit_id INT UNSIGNED PRIMARY KEY,
 NAME VARCHAR(20) NOT NULL,
 create_at DATETIME DEFAULT NOW()
 );
+
+-- 날짜만 가지고 오고 싶을때는 CURRENT_DATE
 
 INSERT INTO t_hobbit_2 
 (hobbit_id, NAME)
@@ -171,6 +176,7 @@ WHERE dept_no = 'd001'
 DROP TABLE t_order;
 DROP TABLE t_customer;
 
+-- FORIGN KEY 내가 참조한 테이블에 있는 값만 사용하기 위해 제약을 거는것
 CREATE TABLE t_order (
 	o_no INT UNSIGNED PRIMARY KEY,
 	cus_no INT UNSIGNED,
