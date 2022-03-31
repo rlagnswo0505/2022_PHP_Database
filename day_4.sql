@@ -57,7 +57,7 @@ GROUP BY B.gender;
  ON A.emp_no = B.emp_no
  INNER JOIN departments C
  ON B.dept_no = C.dept_no
- GROUP BY B.dept_no;
+ GROUP BY B.dept_no, C.dept_name; -- mysql은 C.dept_name 생략가능 but 오라클은 불가능;
  
  -- 직무별 연봉 평균값
 SELECT avg(A.salary), B.title
