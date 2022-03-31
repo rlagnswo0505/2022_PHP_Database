@@ -66,3 +66,17 @@ SELECT avg(A.salary), B.title
  ON A.emp_no = B.emp_no
  GROUP BY B.title;
 
+-- 개인마다 평균 연봉 구함 >  개인을 부서로 조인 >
+-- 부서별로 그룹 묵음 > 가장 높은 평균연봉 값
+SELECT Z.dept_no, MAX(avg_salary) AS max_salary, X.dept_name
+FROM (
+SELECT AVG(A.salary) AS avg_salary, dept_no
+FROM salaries A
+INNER JOIN dept_emp B
+ON A.emp_no = B.emp_no
+GROUP BY A.emp_no
+) Z
+INNER JOIN departments X
+ON Z.dept_no = X.dept_no
+GROUP BY Z.dept_no
+ORDER BY max_salary DESC;
