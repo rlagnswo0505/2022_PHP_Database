@@ -62,6 +62,11 @@ if(nm = '농구',
 ) AS 'eng'
 FROM t_hobbit;
 
+SELECT CONCAT(nm, 
+			if(nm = '농구', 'basketball', if(nm = '배구', 'valleyball','football'))
+			) AS 'eng'
+	FROM t_hobbit;
+	
 -- ifnull 수식1이 null이 아니면 수식1, null이면 수식2 (오라클 : nvl, sql-server : isnull)
 SELECT *, IFNULL(memberaddress, '주소없음')
 FROM membertbl;
@@ -84,7 +89,7 @@ FROM t_hobbit;
 -- case when 조건식 than...
 SELECT
 	nm,
-	CASE nm 
+	CASE 
 		when nm = '농구' then 'basketball'
 		when nm = '배구' then 'valleyball'
 		when nm = '축구' then 'football'
@@ -96,15 +101,20 @@ FROM t_hobbit;
 SELECT ASCII('A'), CHAR(65);
 
 -- 문자열 합치기 CONCAT, CONCAT_WS
-SELECT CONCAT('A','_','B','_','C');
-SELECT CONCAT_WS(', ','A','B','C');
+SELECT CONCAT('A', '_', 'B', '_', 'C');
+SELECT CONCAT_WS(', ', 'A', 'B', 'C');
 
 -- 천단위에 (,)표시, 뒤에는 소수점 자리 
-SELECT FORMAT(111122233.1234,2);
+SELECT FORMAT(111122233.5234, 2);
+SELECT FORMAT(floor(111122233.5234), 2);
+
+-- FLOOR 무조건 내림, CEIL 무조건 올림,  반올림
+SELECT FLOOR(11.5), CEIL(11.5), ROUND(11.5);
+SELECT FLOOR(11.5), CEIL(11.5), ROUND(11.5);
 
 -- INSERT 시작값 위치, 지우는 값
 SELECT 
-	INSERT('ABCDEFGHT', 3, 0, '@@@@'),74
+	INSERT('ABCDEFGHT', 3, 0, '@@@@'),
 	INSERT('ABCDEFGHT', 3, 4, '@@@@');
 	
 -- LEFT, RIGHT
